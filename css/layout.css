@@ -1,0 +1,127 @@
+/* layout.css — چیدمان اصلی */
+
+html,
+body {
+  height: 100%;
+  overflow: hidden;   /* ← کل صفحه اسکرول نداره، فقط پنل‌ها */
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans);
+  font-size: var(--font-size-base);
+  transition: background-color var(--transition), color var(--transition);
+}
+
+#app {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+/* ===== هدر ===== */
+.app-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-sm) var(--space-md);
+  border-bottom: 1px solid var(--border);
+  background-color: var(--bg-elevated);
+  flex-shrink: 0;
+}
+
+.app-header h1 {
+  font-size: var(--font-size-xl);
+  font-weight: 700;
+  color: var(--primary);
+}
+
+.header-actions {
+  display: flex;
+  gap: var(--space-sm);
+}
+
+/* ===== Workspace (سه‌ستونه) ===== */
+.workspace {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+  
+}
+
+/* Sidebar */
+.sidebar {
+  width: var(--sidebar-width);
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  padding: var(--space-md);
+  background-color: var(--bg-alt);
+  border-left: 1px solid var(--border);
+  overflow-y: auto;
+}
+
+/* Editor و Preview */
+.editor-pane,
+.preview-pane {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  min-width: 0;
+}
+
+.editor-pane {
+  border-left: 1px solid var(--border);
+}
+
+.preview-pane {
+  border-left: 1px solid var(--border);
+  background-color: var(--bg-elevated);
+}
+
+/* ===== Pane Header (بالای Editor و Preview) ===== */
+.pane-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-sm) var(--space-md);
+  border-bottom: 1px solid var(--border);
+  background-color: var(--bg-alt);
+  flex-shrink: 0;
+  min-height: 48px;
+}
+
+.pane-title {
+  font-size: var(--font-size-sm);
+  color: var(--text-muted);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 1024px) {
+  .preview-pane {
+    display: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .sidebar {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 100;
+    box-shadow: var(--shadow-lg);
+    transform: translateX(100%);
+    transition: transform 250ms ease;
+  }
+
+  .sidebar.open {
+    transform: translateX(0);
+  }
+}

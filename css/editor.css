@@ -1,0 +1,75 @@
+/* editor.css — استایل ویرایشگر */
+
+.note-title-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  color: var(--text);
+  font-size: var(--font-size-lg);
+  font-weight: 600;
+  padding: var(--space-xs) 0;
+}
+
+.note-title-input:focus {
+  outline: none;
+}
+
+.note-title-input::placeholder {
+  color: var(--text-faint);
+  font-weight: normal;
+}
+
+.save-status {
+  font-size: 12px;
+  color: var(--text-muted);
+  padding: 2px 8px;
+  border-radius: var(--radius-sm);
+  transition: all var(--transition);
+}
+
+.save-status.saving {
+  color: var(--text-faint);
+}
+
+.save-status.saved {
+  color: #10b981;
+}
+
+/* ===== Textarea ===== */
+.note-editor {
+  flex: 1;
+  width: 100%;
+  padding: var(--space-md);
+  background-color: var(--bg-elevated);
+  color: var(--text);
+  border: none;
+  font-family: var(--font-mono);
+  font-size: 15px;
+  line-height: 1.7;
+  resize: none;
+  direction: rtl;
+}
+
+.note-editor:focus {
+  outline: none;
+}
+
+.note-editor::placeholder {
+  color: var(--text-faint);
+}
+
+/* ===== Footer ===== */
+.editor-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-sm) var(--space-md);
+  border-top: 1px solid var(--border);
+  background-color: var(--bg-alt);
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.editor-stat {
+  font-family: var(--font-mono);
+}

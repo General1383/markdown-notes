@@ -20,7 +20,106 @@
 </head>
 <body>
 
-  <main id="app"></main>
+  <main id="app">
+
+    <!-- ===== هدر ===== -->
+    <header class="app-header">
+      <h1>Markdown Notes</h1>
+
+      <div class="header-actions">
+        <button id="theme-toggle" class="icon-btn" type="button" aria-label="تغییر تم" title="تغییر تم">🌙</button>
+        <button id="command-btn" class="icon-btn" type="button" aria-label="Command Palette" title="Ctrl+K">⌘</button>
+        <button id="toggle-sidebar" class="icon-btn" type="button" aria-label="سایدبار" title="سایدبار">☰</button>
+      </div>
+    </header>
+
+    <!-- ===== Workspace ===== -->
+    <div class="workspace">
+
+      <!-- ===== Sidebar ===== -->
+      <aside class="sidebar" aria-label="لیست یادداشت‌ها">
+        
+        <!-- دکمه‌ی یادداشت جدید -->
+        <button id="new-note-btn" class="btn-primary full-width" type="button">
+          ➕ یادداشت جدید
+        </button>
+
+        <!-- جستجو -->
+        <input 
+          type="text" 
+          id="search-input" 
+          class="search-input" 
+          placeholder="جستجو..."
+          aria-label="جستجوی یادداشت"
+        >
+
+        <!-- فولدرها -->
+        <div class="sidebar-section">
+          <h3 class="sidebar-title">📁 فولدرها</h3>
+          <ul id="folder-list" class="folder-list">
+            <!-- با JS پر می‌شه -->
+          </ul>
+        </div>
+
+        <!-- یادداشت‌ها -->
+        <div class="sidebar-section flex-grow">
+          <h3 class="sidebar-title">📝 یادداشت‌ها</h3>
+          <ul id="note-list" class="note-list">
+            <!-- با JS پر می‌شه -->
+          </ul>
+        </div>
+
+        <!-- تگ‌ها -->
+        <div class="sidebar-section">
+          <h3 class="sidebar-title">🏷️ تگ‌ها</h3>
+          <div id="tag-list" class="tag-list">
+            <!-- با JS پر می‌شه -->
+          </div>
+        </div>
+
+      </aside>
+
+      <!-- ===== Editor ===== -->
+      <section class="editor-pane" aria-label="ویرایشگر">
+        <div class="pane-header">
+          <input 
+            type="text" 
+            id="note-title" 
+            class="note-title-input" 
+            placeholder="عنوان یادداشت..."
+            aria-label="عنوان یادداشت"
+          >
+          <span id="save-status" class="save-status">ذخیره شد</span>
+        </div>
+
+        <textarea 
+          id="note-editor" 
+          class="note-editor" 
+          placeholder="با Markdown تایپ کن...&#10;&#10;# عنوان&#10;**بولد**&#10;- لیست"
+          aria-label="متن یادداشت"
+          spellcheck="false"
+        ></textarea>
+
+        <div class="editor-footer">
+          <span id="word-count" class="editor-stat">0 کلمه</span>
+          <span id="reading-time" class="editor-stat">۰ دقیقه</span>
+        </div>
+      </section>
+
+      <!-- ===== Preview ===== -->
+      <section class="preview-pane" aria-label="پیش‌نمایش">
+        <div class="pane-header">
+          <span class="pane-title">پیش‌نمایش</span>
+        </div>
+
+        <div id="preview" class="preview-content">
+          <!-- با JS پر می‌شه -->
+        </div>
+      </section>
+
+    </div>
+
+  </main>
 
   <script type="module" src="js/main.js"></script>
 

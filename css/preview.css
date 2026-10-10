@@ -1,0 +1,15 @@
+/* preview.css — استایل پیش‌نمایش */
+
+.preview-content {
+  flex: 1;
+  padding: var(--space-lg);
+  overflow-y: auto;
+  line-height: 1.8;
+  color: var(--text);
+}
+
+.preview-content:empty::before {
+  content: 'پیش‌نمایش این‌جا ظاهر می‌شه...';
+  color: var(--text-faint);
+  font-style: italic;
+}

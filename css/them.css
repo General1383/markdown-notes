@@ -1,0 +1,87 @@
+/* theme.css — متغیرها و تم */
+
+:root {
+  /* رنگ‌ها */
+  --bg: #ffffff;
+  --bg-alt: #f8fafc;
+  --bg-hover: #f1f5f9;
+  --bg-elevated: #ffffff;
+
+  --text: #1a1a1a;
+  --text-muted: #64748b;
+  --text-faint: #94a3b8;
+
+  --border: #e2e8f0;
+  --border-strong: #cbd5e1;
+
+  /* رنگ اصلی */
+  --primary: #6366f1;
+  --primary-hover: #4f46e5;
+  --primary-soft: #eef2ff;
+
+  /* رنگ‌های Markdown */
+  --md-heading: #1e293b;
+  --md-link: #3b82f6;
+  --md-code-bg: #f1f5f9;
+  --md-code-text: #db2777;
+  --md-quote-border: #6366f1;
+  --md-quote-bg: #f8fafc;
+
+  /* اندازه‌ها */
+  --radius: 8px;
+  --radius-sm: 4px;
+  --radius-lg: 12px;
+
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.12);
+
+  /* فاصله‌ها */
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+
+  /* فونت */
+  --font-sans: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'Courier New', 'Vazirmatn', monospace;
+  --font-size-sm: 13px;
+  --font-size-base: 14px;
+  --font-size-lg: 16px;
+  --font-size-xl: 22px;
+
+  /* اندازه‌ی پنل‌ها */
+  --sidebar-width: 280px;
+
+  --transition: 150ms ease;
+}
+
+[data-theme='dark'] {
+  --bg: #0f172a;
+  --bg-alt: #1e293b;
+  --bg-hover: #334155;
+  --bg-elevated: #1e293b;
+
+  --text: #f1f5f9;
+  --text-muted: #94a3b8;
+  --text-faint: #64748b;
+
+  --border: #334155;
+  --border-strong: #475569;
+
+  --primary: #818cf8;
+  --primary-hover: #a5b4fc;
+  --primary-soft: #312e81;
+
+  --md-heading: #f1f5f9;
+  --md-link: #60a5fa;
+  --md-code-bg: #0f172a;
+  --md-code-text: #f472b6;
+  --md-quote-border: #818cf8;
+  --md-quote-bg: #1e293b;
+
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+  --shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.6);
+}
