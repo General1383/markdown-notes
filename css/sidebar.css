@@ -2,7 +2,6 @@
 
 .full-width {
   width: 100%;
-  justify-content: center;
 }
 
 .sidebar-section {
@@ -17,29 +16,51 @@
 }
 
 .sidebar-title {
-  font-size: var(--font-size-sm);
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  font-size: var(--font-size-xs);
   font-weight: 600;
   color: var(--text-muted);
   text-transform: uppercase;
-  letter-spacing: 0.5px;
-  padding: var(--space-xs) 0;
+  letter-spacing: 0.8px;
+  padding: 0 var(--space-xs);
 }
 
 /* ===== جستجو ===== */
+.search-wrapper {
+  position: relative;
+}
+
+.search-icon {
+  position: absolute;
+  top: 50%;
+  right: 12px;
+  transform: translateY(-50%);
+  font-size: 14px;
+  pointer-events: none;
+  opacity: 0.5;
+}
+
 .search-input {
   width: 100%;
-  padding: var(--space-sm) var(--space-md);
+  padding: 8px 36px 8px 12px;
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  background-color: var(--bg-elevated);
+  background-color: var(--bg-alt);
   color: var(--text);
-  font-size: var(--font-size-base);
-  transition: border-color var(--transition);
+  font-size: var(--font-size-sm);
+  transition: all var(--transition);
+}
+
+.search-input::placeholder {
+  color: var(--text-faint);
 }
 
 .search-input:focus {
   outline: none;
   border-color: var(--primary);
+  box-shadow: 0 0 0 3px var(--primary-soft);
 }
 
 /* ===== لیست‌ها ===== */
@@ -48,7 +69,7 @@
   list-style: none;
   display: flex;
   flex-direction: column;
-  gap: var(--space-xs);
+  gap: 2px;
 }
 
 .note-list {
@@ -60,11 +81,12 @@
   display: flex;
   align-items: center;
   gap: var(--space-sm);
-  padding: var(--space-sm) var(--space-md);
-  border-radius: var(--radius);
+  padding: 8px 10px;
+  border-radius: var(--radius-sm);
   cursor: pointer;
-  transition: background-color var(--transition);
-  font-size: var(--font-size-base);
+  transition: all var(--transition);
+  font-size: var(--font-size-sm);
+  color: var(--text);
 }
 
 .folder-item:hover,
@@ -89,16 +111,17 @@
 .tag-list {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--space-xs);
+  gap: 6px;
+  padding: 0 var(--space-xs);
 }
 
 .tag {
   display: inline-block;
-  padding: 2px 8px;
-  background-color: var(--bg-elevated);
+  padding: 3px 10px;
+  background-color: var(--bg-alt);
   border: 1px solid var(--border);
-  border-radius: var(--radius-sm);
-  font-size: 12px;
+  border-radius: 999px;
+  font-size: 11px;
   color: var(--text-muted);
   cursor: pointer;
   transition: all var(--transition);
@@ -111,6 +134,15 @@
 
 .tag.active {
   background-color: var(--primary);
-  color: white;
+  color: var(--primary-text);
   border-color: var(--primary);
+}
+
+/* ===== Empty State ===== */
+.empty-state {
+  text-align: center;
+  padding: var(--space-md);
+  color: var(--text-faint);
+  font-size: 12px;
+  font-style: italic;
 }

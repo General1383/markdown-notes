@@ -3,6 +3,8 @@
 import { getState, setState } from './state.js';
 import { loadNotes, loadSettings } from './storage.js';
 import { setupEditor, loadActiveNote } from './editor.js';
+import { renderPreview } from './preview.js';
+import { setupTheme } from './theme.js';
 
 // ===== ساخت یادداشت جدید =====
 function createNote() {
@@ -23,9 +25,6 @@ function init() {
   const settings = loadSettings();
   setState(settings);
 
-  // اعمال تم
-  document.documentElement.setAttribute('data-theme', settings.theme);
-
   // ۲. یادداشت‌ها رو لود کن
   const data = loadNotes();
   setState({
@@ -45,9 +44,11 @@ function init() {
     setState({ activeNoteId: data.notes[0].id });
   }
 
-  // ۴. Editor رو راه‌اندازی کن
+  // ۴. راه‌اندازی‌ها
+  setupTheme();
   setupEditor();
   loadActiveNote();
+  renderPreview();
 }
 
 init();

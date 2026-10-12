@@ -1,0 +1,109 @@
+/* theme.css — متغیرها و تم */
+
+:root {
+  /* پس‌زمینه */
+  --bg: #f5f6fa;
+  --bg-alt: #ffffff;
+  --bg-hover: #f1f3f9;
+  --bg-elevated: #ffffff;
+  --bg-sidebar: #fafbfd;
+
+  /* متن */
+  --text: #1a1d21;
+  --text-muted: #6b7280;
+  --text-faint: #9ca3af;
+
+  /* مرزها */
+  --border: #e5e7eb;
+  --border-strong: #d1d5db;
+
+  /* رنگ اصلی */
+  --primary: #6366f1;
+  --primary-hover: #4f46e5;
+  --primary-soft: #eef2ff;
+  --primary-text: #ffffff;
+
+  /* وضعیت */
+  --success: #10b981;
+  --success-soft: #d1fae5;
+  --warning: #f59e0b;
+  --warning-soft: #fef3c7;
+
+  /* Markdown */
+  --md-heading: #111827;
+  --md-link: #4f46e5;
+  --md-code-bg: #f3f4f6;
+  --md-code-text: #db2777;
+  --md-quote-border: #6366f1;
+  --md-quote-bg: #f9fafb;
+
+  /* اندازه */
+  --radius-sm: 6px;
+  --radius: 8px;
+  --radius-lg: 12px;
+
+  /* سایه */
+  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.04);
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.06);
+  --shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.1);
+
+  /* فاصله */
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+
+  /* فونت */
+  --font-sans: 'Vazirmatn', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Courier New', monospace;
+  --font-size-xs: 11px;
+  --font-size-sm: 13px;
+  --font-size-base: 14px;
+  --font-size-lg: 16px;
+  --font-size-xl: 20px;
+
+  /* ابعاد */
+  --sidebar-width: 280px;
+  --header-height: 52px;
+
+  --transition: 150ms ease;
+}
+
+[data-theme='dark'] {
+  --bg: #0f1419;
+  --bg-alt: #1a1f26;
+  --bg-hover: #252b34;
+  --bg-elevated: #1a1f26;
+  --bg-sidebar: #14181e;
+
+  --text: #e7e9ea;
+  --text-muted: #8b98a5;
+  --text-faint: #5b6673;
+
+  --border: #2a3138;
+  --border-strong: #3d4550;
+
+  --primary: #818cf8;
+  --primary-hover: #a5b4fc;
+  --primary-soft: #1e1b4b;
+  --primary-text: #0f1419;
+
+  --success: #34d399;
+  --success-soft: #064e3b;
+  --warning: #fbbf24;
+  --warning-soft: #78350f;
+
+  --md-heading: #f7f9fa;
+  --md-link: #60a5fa;
+  --md-code-bg: #0f1419;
+  --md-code-text: #f472b6;
+  --md-quote-border: #818cf8;
+  --md-quote-bg: #14181e;
+
+  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.4);
+  --shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.5);
+}

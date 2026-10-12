@@ -1,0 +1,135 @@
+/* markdown.css — استایل المان‌های Markdown */
+
+.preview-content h1,
+.preview-content h2,
+.preview-content h3,
+.preview-content h4,
+.preview-content h5,
+.preview-content h6 {
+  color: var(--md-heading);
+  font-weight: 700;
+  margin: var(--space-lg) 0 var(--space-md);
+  line-height: 1.4;
+  letter-spacing: -0.3px;
+}
+
+.preview-content h1:first-child,
+.preview-content h2:first-child,
+.preview-content h3:first-child {
+  margin-top: 0;
+}
+
+.preview-content h1 {
+  font-size: 1.9em;
+  border-bottom: 2px solid var(--border);
+  padding-bottom: var(--space-sm);
+}
+
+.preview-content h2 {
+  font-size: 1.5em;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: var(--space-xs);
+}
+
+.preview-content h3 {
+  font-size: 1.25em;
+}
+
+.preview-content h4 {
+  font-size: 1.1em;
+}
+
+.preview-content h5,
+.preview-content h6 {
+  font-size: 1em;
+  color: var(--text-muted);
+}
+
+.preview-content p {
+  margin: var(--space-md) 0;
+}
+
+.preview-content strong {
+  font-weight: 700;
+  color: var(--md-heading);
+}
+
+.preview-content em {
+  font-style: italic;
+  color: var(--text-muted);
+}
+
+.preview-content a {
+  color: var(--md-link);
+  text-decoration: none;
+  border-bottom: 1px dashed currentColor;
+  transition: opacity var(--transition);
+}
+
+.preview-content a:hover {
+  opacity: 0.75;
+}
+
+.preview-content code {
+  background-color: var(--md-code-bg);
+  color: var(--md-code-text);
+  padding: 3px 7px;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-mono);
+  font-size: 0.86em;
+  font-weight: 500;
+}
+
+.preview-content pre {
+  background-color: var(--md-code-bg);
+  padding: var(--space-md);
+  border-radius: var(--radius);
+  overflow-x: auto;
+  margin: var(--space-md) 0;
+  border: 1px solid var(--border);
+}
+
+.preview-content pre code {
+  background: none;
+  color: var(--text);
+  padding: 0;
+  font-size: 0.86em;
+  line-height: 1.7;
+  font-weight: 400;
+}
+
+.preview-content ul,
+.preview-content ol {
+  padding-inline-start: var(--space-lg);
+  margin: var(--space-md) 0;
+}
+
+.preview-content ul {
+  list-style: disc;
+}
+
+.preview-content ol {
+  list-style: decimal;
+}
+
+.preview-content li {
+  margin: 6px 0;
+}
+
+.preview-content li::marker {
+  color: var(--primary);
+}
+
+.preview-content blockquote {
+  border-inline-start: 4px solid var(--md-quote-border);
+  background-color: var(--md-quote-bg);
+  padding: var(--space-md);
+  margin: var(--space-md) 0;
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+.preview-content blockquote p {
+  margin: 0;
+}

@@ -3,7 +3,7 @@
 html,
 body {
   height: 100%;
-  overflow: hidden;   /* ← کل صفحه اسکرول نداره، فقط پنل‌ها */
+  overflow: hidden;
 }
 
 body {
@@ -11,6 +11,7 @@ body {
   color: var(--text);
   font-family: var(--font-sans);
   font-size: var(--font-size-base);
+  line-height: 1.6;
   transition: background-color var(--transition), color var(--transition);
 }
 
@@ -25,32 +26,45 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: var(--space-sm) var(--space-md);
+  padding: 0 var(--space-md);
+  height: var(--header-height);
   border-bottom: 1px solid var(--border);
-  background-color: var(--bg-elevated);
+  background-color: var(--bg-alt);
   flex-shrink: 0;
+  z-index: 10;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.logo {
+  font-size: 20px;
 }
 
 .app-header h1 {
-  font-size: var(--font-size-xl);
+  font-size: var(--font-size-lg);
   font-weight: 700;
-  color: var(--primary);
+  color: var(--text);
+  letter-spacing: -0.3px;
 }
 
 .header-actions {
   display: flex;
-  gap: var(--space-sm);
+  gap: 4px;
 }
 
-/* ===== Workspace (سه‌ستونه) ===== */
+/* ===== Workspace ===== */
 .workspace {
   display: flex;
   flex: 1;
   overflow: hidden;
-  
+  direction: ltr;
 }
 
-/* Sidebar */
+/* ===== پنل‌ها ===== */
 .sidebar {
   width: var(--sidebar-width);
   flex-shrink: 0;
@@ -58,12 +72,12 @@ body {
   flex-direction: column;
   gap: var(--space-md);
   padding: var(--space-md);
-  background-color: var(--bg-alt);
-  border-left: 1px solid var(--border);
+  background-color: var(--bg-sidebar);
+  border-right: 1px solid var(--border);
   overflow-y: auto;
+  direction: rtl;
 }
 
-/* Editor و Preview */
 .editor-pane,
 .preview-pane {
   flex: 1;
@@ -71,35 +85,52 @@ body {
   flex-direction: column;
   overflow: hidden;
   min-width: 0;
+  background-color: var(--bg-alt);
 }
 
 .editor-pane {
-  border-left: 1px solid var(--border);
+  border-right: 1px solid var(--border);
 }
 
 .preview-pane {
-  border-left: 1px solid var(--border);
-  background-color: var(--bg-elevated);
+  background-color: var(--bg);
 }
 
-/* ===== Pane Header (بالای Editor و Preview) ===== */
+/* ===== Pane Header ===== */
 .pane-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: var(--space-sm) var(--space-md);
+  padding: 0 var(--space-md);
+  height: 40px;
   border-bottom: 1px solid var(--border);
-  background-color: var(--bg-alt);
+  background-color: var(--bg-sidebar);
   flex-shrink: 0;
-  min-height: 48px;
+}
+
+.pane-header-left {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.pane-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: var(--primary);
+}
+
+.pane-dot.preview {
+  background-color: var(--success);
 }
 
 .pane-title {
-  font-size: var(--font-size-sm);
+  font-size: var(--font-size-xs);
   color: var(--text-muted);
   font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.8px;
 }
 
 /* ===== Responsive ===== */
@@ -112,7 +143,7 @@ body {
 @media (max-width: 640px) {
   .sidebar {
     position: fixed;
-    top: 0;
+    top: var(--header-height);
     right: 0;
     bottom: 0;
     z-index: 100;

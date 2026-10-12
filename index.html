@@ -8,15 +8,18 @@
   <title>یادداشت‌های Markdown</title>
 
   <link rel="icon" href="data:,">
-
-  <link rel="stylesheet" href="css/reset.css">
-  <link rel="stylesheet" href="css/theme.css">
-  <link rel="stylesheet" href="css/layout.css">
-  <link rel="stylesheet" href="css/sidebar.css">
-  <link rel="stylesheet" href="css/editor.css">
-  <link rel="stylesheet" href="css/preview.css">
-  <link rel="stylesheet" href="css/markdown.css">
-  <link rel="stylesheet" href="css/components.css">
+  <!-- فونت Vazirmatn -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+ <link rel="stylesheet" href="css/reset.css">
+<link rel="stylesheet" href="css/theme.css">
+<link rel="stylesheet" href="css/layout.css">
+<link rel="stylesheet" href="css/sidebar.css">
+<link rel="stylesheet" href="css/editor.css">
+<link rel="stylesheet" href="css/preview.css">
+<link rel="stylesheet" href="css/markdown.css">
+<link rel="stylesheet" href="css/components.css">
 </head>
 <body>
 
@@ -24,7 +27,10 @@
 
     <!-- ===== هدر ===== -->
     <header class="app-header">
-      <h1>Markdown Notes</h1>
+      <div class="header-left">
+        <span class="logo">📝</span>
+        <h1>Markdown Notes</h1>
+      </div>
 
       <div class="header-actions">
         <button id="theme-toggle" class="icon-btn" type="button" aria-label="تغییر تم" title="تغییر تم">🌙</button>
@@ -38,83 +44,103 @@
 
       <!-- ===== Sidebar ===== -->
       <aside class="sidebar" aria-label="لیست یادداشت‌ها">
-        
-        <!-- دکمه‌ی یادداشت جدید -->
+
         <button id="new-note-btn" class="btn-primary full-width" type="button">
-          ➕ یادداشت جدید
+          <span>➕</span>
+          <span>یادداشت جدید</span>
         </button>
 
-        <!-- جستجو -->
-        <input 
-          type="text" 
-          id="search-input" 
-          class="search-input" 
-          placeholder="جستجو..."
-          aria-label="جستجوی یادداشت"
-        >
-
-        <!-- فولدرها -->
-        <div class="sidebar-section">
-          <h3 class="sidebar-title">📁 فولدرها</h3>
-          <ul id="folder-list" class="folder-list">
-            <!-- با JS پر می‌شه -->
-          </ul>
+        <div class="search-wrapper">
+          <span class="search-icon">🔍</span>
+          <input 
+            type="text" 
+            id="search-input" 
+            class="search-input" 
+            placeholder="جستجو..."
+            aria-label="جستجوی یادداشت"
+          >
         </div>
 
-        <!-- یادداشت‌ها -->
+        <div class="sidebar-section">
+          <h3 class="sidebar-title">
+            <span>📁</span>
+            <span>فولدرها</span>
+          </h3>
+          <ul id="folder-list" class="folder-list"></ul>
+        </div>
+
         <div class="sidebar-section flex-grow">
-          <h3 class="sidebar-title">📝 یادداشت‌ها</h3>
-          <ul id="note-list" class="note-list">
-            <!-- با JS پر می‌شه -->
-          </ul>
+          <h3 class="sidebar-title">
+            <span>📝</span>
+            <span>یادداشت‌ها</span>
+          </h3>
+          <ul id="note-list" class="note-list"></ul>
         </div>
 
-        <!-- تگ‌ها -->
         <div class="sidebar-section">
-          <h3 class="sidebar-title">🏷️ تگ‌ها</h3>
-          <div id="tag-list" class="tag-list">
-            <!-- با JS پر می‌شه -->
-          </div>
+          <h3 class="sidebar-title">
+            <span>🏷️</span>
+            <span>تگ‌ها</span>
+          </h3>
+          <div id="tag-list" class="tag-list"></div>
         </div>
 
       </aside>
 
       <!-- ===== Editor ===== -->
       <section class="editor-pane" aria-label="ویرایشگر">
+        
         <div class="pane-header">
-          <input 
-            type="text" 
-            id="note-title" 
-            class="note-title-input" 
-            placeholder="عنوان یادداشت..."
-            aria-label="عنوان یادداشت"
-          >
-          <span id="save-status" class="save-status">ذخیره شد</span>
+          <div class="pane-header-left">
+            <span class="pane-dot"></span>
+            <span class="pane-title">ویرایشگر</span>
+          </div>
+          <span id="save-status" class="save-status">آماده</span>
         </div>
+
+        <input 
+          type="text" 
+          id="note-title" 
+          class="note-title-input" 
+          placeholder="عنوان یادداشت..."
+          aria-label="عنوان یادداشت"
+        >
+
+        <div class="editor-divider"></div>
 
         <textarea 
           id="note-editor" 
           class="note-editor" 
-          placeholder="با Markdown تایپ کن...&#10;&#10;# عنوان&#10;**بولد**&#10;- لیست"
+          placeholder="با Markdown تایپ کن...&#10;&#10;# عنوان&#10;**بولد**&#10;- لیست&#10;> نقل قول&#10;`کد`"
           aria-label="متن یادداشت"
           spellcheck="false"
         ></textarea>
 
         <div class="editor-footer">
-          <span id="word-count" class="editor-stat">0 کلمه</span>
-          <span id="reading-time" class="editor-stat">۰ دقیقه</span>
+          <span id="word-count" class="editor-stat">
+            <span class="stat-icon">✏️</span>
+            <span>۰ کلمه</span>
+          </span>
+          <span id="reading-time" class="editor-stat">
+            <span class="stat-icon">⏱️</span>
+            <span>۰ دقیقه</span>
+          </span>
         </div>
+
       </section>
 
       <!-- ===== Preview ===== -->
       <section class="preview-pane" aria-label="پیش‌نمایش">
+        
         <div class="pane-header">
-          <span class="pane-title">پیش‌نمایش</span>
+          <div class="pane-header-left">
+            <span class="pane-dot preview"></span>
+            <span class="pane-title">پیش‌نمایش</span>
+          </div>
         </div>
 
-        <div id="preview" class="preview-content">
-          <!-- با JS پر می‌شه -->
-        </div>
+        <div id="preview" class="preview-content"></div>
+
       </section>
 
     </div>

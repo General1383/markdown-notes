@@ -2,17 +2,20 @@
 
 import { getState, setState } from './state.js';
 import { saveNotes } from './storage.js';
+import { renderPreview } from './preview.js';
 
 let debounceTimer = null;
 let isSettingValues = false;
 
-// ===== ذخیره‌ی خودکار (با Debounce) =====
+//  ذخیره‌ی خودکار (با Debounce) =====
 function scheduleSave() {
   clearTimeout(debounceTimer);
 
+  updateSaveStatus('در حال ذخیره...', 'saving');
+  renderPreview();
+
   debounceTimer = setTimeout(() => {
     const state = getState();
-
     saveNotes(state.notes, state.folders, state.tags);
 
     setState({
@@ -22,8 +25,6 @@ function scheduleSave() {
 
     updateSaveStatus('ذخیره شد', 'saved');
   }, 500);
-
-  updateSaveStatus('در حال ذخیره...', 'saving');
 }
 
 function updateSaveStatus(text, className) {
@@ -34,7 +35,7 @@ function updateSaveStatus(text, className) {
   status.className = 'save-status ' + className;
 }
 
-// ===== آپدیت یادداشت فعال =====
+//  آپدیت یادداشت فعال 
 function updateActiveNote(patch) {
   const state = getState();
   const activeId = state.activeNoteId;
@@ -50,22 +51,20 @@ function updateActiveNote(patch) {
   setState({ notes: newNotes, isDirty: true });
 }
 
-// ===== Event Handlers =====
+//  Event Handlers 
 function handleTitleInput(e) {
   if (isSettingValues) return;
-  const title = e.target.value;
-  updateActiveNote({ title });
+  updateActiveNote({ title: e.target.value });
   scheduleSave();
 }
 
 function handleContentInput(e) {
   if (isSettingValues) return;
-  const content = e.target.value;
-  updateActiveNote({ content });
+  updateActiveNote({ content: e.target.value });
   scheduleSave();
 }
 
-// ===== مقداردهی اولیه =====
+//  راه‌اندازی 
 function setupEditor() {
   const titleEl = document.getElementById('note-title');
   const editorEl = document.getElementById('note-editor');
@@ -74,7 +73,7 @@ function setupEditor() {
   editorEl.addEventListener('input', handleContentInput);
 }
 
-// ===== بارگذاری یادداشت فعال به editor =====
+//  بارگذاری یادداشت فعال  Editor 
 function loadActiveNote() {
   const state = getState();
   const note = state.notes.find((n) => n.id === state.activeNoteId);
