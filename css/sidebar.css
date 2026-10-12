@@ -152,6 +152,7 @@
   color: var(--text-muted);
   cursor: pointer;
   transition: all var(--transition);
+  user-select: none;
 }
 
 .tag:hover {
@@ -172,4 +173,5 @@
   color: var(--text-faint);
   font-size: 12px;
   font-style: italic;
+  width: 100%;
 }

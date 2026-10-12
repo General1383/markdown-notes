@@ -3,11 +3,13 @@
 import { getState, setState } from './state.js';
 import { saveNotes } from './storage.js';
 import { renderPreview } from './preview.js';
+import { updateTags, renderTagList } from './tags.js';
+import { renderSidebar } from './sidebar.js';
 
 let debounceTimer = null;
 let isSettingValues = false;
 
-//  ذخیره‌ی خودکار (با Debounce) =====
+// ===== ذخیره‌ی خودکار =====
 function scheduleSave() {
   clearTimeout(debounceTimer);
 
@@ -35,7 +37,7 @@ function updateSaveStatus(text, className) {
   status.className = 'save-status ' + className;
 }
 
-//  آپدیت یادداشت فعال 
+// ===== آپدیت یادداشت فعال =====
 function updateActiveNote(patch) {
   const state = getState();
   const activeId = state.activeNoteId;
@@ -51,29 +53,34 @@ function updateActiveNote(patch) {
   setState({ notes: newNotes, isDirty: true });
 }
 
-//  Event Handlers 
+// ===== Event Handlers =====
 function handleTitleInput(e) {
   if (isSettingValues) return;
   updateActiveNote({ title: e.target.value });
   scheduleSave();
+  renderSidebar();
 }
 
 function handleContentInput(e) {
   if (isSettingValues) return;
   updateActiveNote({ content: e.target.value });
   scheduleSave();
+
+  // آپدیت تگ‌ها
+  updateTags();
+  renderTagList();
 }
 
-//  راه‌اندازی 
+// ===== راه‌اندازی =====
 function setupEditor() {
   const titleEl = document.getElementById('note-title');
   const editorEl = document.getElementById('note-editor');
 
-  titleEl.addEventListener('input', handleTitleInput);
-  editorEl.addEventListener('input', handleContentInput);
+  if (titleEl) titleEl.addEventListener('input', handleTitleInput);
+  if (editorEl) editorEl.addEventListener('input', handleContentInput);
 }
 
-//  بارگذاری یادداشت فعال  Editor 
+// ===== بارگذاری یادداشت فعال =====
 function loadActiveNote() {
   const state = getState();
   const note = state.notes.find((n) => n.id === state.activeNoteId);
@@ -83,19 +90,27 @@ function loadActiveNote() {
 
   if (!note) {
     isSettingValues = true;
-    titleEl.value = '';
-    editorEl.value = '';
-    titleEl.disabled = true;
-    editorEl.disabled = true;
+    if (titleEl) {
+      titleEl.value = '';
+      titleEl.disabled = true;
+    }
+    if (editorEl) {
+      editorEl.value = '';
+      editorEl.disabled = true;
+    }
     isSettingValues = false;
     return;
   }
 
   isSettingValues = true;
-  titleEl.value = note.title || '';
-  editorEl.value = note.content || '';
-  titleEl.disabled = false;
-  editorEl.disabled = false;
+  if (titleEl) {
+    titleEl.value = note.title || '';
+    titleEl.disabled = false;
+  }
+  if (editorEl) {
+    editorEl.value = note.content || '';
+    editorEl.disabled = false;
+  }
   isSettingValues = false;
 }
 

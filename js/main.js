@@ -6,6 +6,7 @@ import { setupEditor, loadActiveNote } from './editor.js';
 import { renderPreview } from './preview.js';
 import { setupTheme } from './theme.js';
 import { setupSidebar } from './sidebar.js';
+import { setupTags } from './tags.js';
 
 // ===== ساخت یادداشت جدید =====
 function createNote() {
@@ -45,6 +46,7 @@ function init() {
   setupTheme();
   setupEditor();
   setupSidebar();
+  setupTags();
   loadActiveNote();
   renderPreview();
 }

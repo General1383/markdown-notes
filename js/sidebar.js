@@ -3,6 +3,7 @@
 import { getState, setState } from './state.js';
 import { loadActiveNote } from './editor.js';
 import { renderPreview } from './preview.js';
+import { updateTags, renderTagList, extractTags } from './tags.js';
 
 // ===== ساخت یادداشت جدید =====
 function createNewNote() {
@@ -50,7 +51,9 @@ function deleteNote(noteId) {
     activeNoteId: newActiveId
   });
 
+  updateTags();
   renderSidebar();
+  renderTagList();
   loadActiveNote();
   renderPreview();
 }
@@ -67,15 +70,14 @@ function selectNote(noteId) {
   renderPreview();
 }
 
-// ===== رندر لیست یادداشت‌ها =====
-function renderNoteList() {
-  const list = document.getElementById('note-list');
-  if (!list) return;
-
+// ===== فیلتر یادداشت‌ها =====
+function getFilteredNotes() {
   const state = getState();
-  const query = state.searchQuery.toLowerCase().trim();
+  const query = (state.searchQuery || '').toLowerCase().trim();
+  const activeTags = state.activeTagFilter || [];
 
   let notes = state.notes;
+
   if (query) {
     notes = notes.filter((n) => {
       const inTitle = (n.title || '').toLowerCase().includes(query);
@@ -84,12 +86,31 @@ function renderNoteList() {
     });
   }
 
+  if (activeTags.length > 0) {
+    notes = notes.filter((n) => {
+      const noteTags = extractTags(n.content);
+      return activeTags.every((t) => noteTags.includes(t));
+    });
+  }
+
+  return notes;
+}
+
+// ===== رندر لیست یادداشت‌ها =====
+function renderNoteList() {
+  const list = document.getElementById('note-list');
+  if (!list) return;
+
+  const state = getState();
+  const notes = getFilteredNotes();
+  const hasFilter = (state.searchQuery || '').trim() || (state.activeTagFilter || []).length > 0;
+
   list.innerHTML = '';
 
   if (notes.length === 0) {
     const empty = document.createElement('li');
     empty.className = 'empty-state';
-    empty.textContent = query ? 'یادداشتی پیدا نشد' : 'هنوز یادداشتی نداری';
+    empty.textContent = hasFilter ? 'یادداشتی پیدا نشد' : 'هنوز یادداشتی نداری';
     list.appendChild(empty);
     return;
   }
@@ -145,5 +166,6 @@ export {
   renderSidebar,
   createNewNote,
   selectNote,
-  deleteNote
+  deleteNote,
+  getFilteredNotes
 };
