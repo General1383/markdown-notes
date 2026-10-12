@@ -5,6 +5,7 @@ import { loadNotes, loadSettings } from './storage.js';
 import { setupEditor, loadActiveNote } from './editor.js';
 import { renderPreview } from './preview.js';
 import { setupTheme } from './theme.js';
+import { setupSidebar } from './sidebar.js';
 
 // ===== ساخت یادداشت جدید =====
 function createNote() {
@@ -21,11 +22,9 @@ function createNote() {
 
 // ===== راه‌اندازی =====
 function init() {
-  // ۱. تنظیمات رو لود کن
   const settings = loadSettings();
   setState(settings);
 
-  // ۲. یادداشت‌ها رو لود کن
   const data = loadNotes();
   setState({
     notes: data.notes,
@@ -33,7 +32,6 @@ function init() {
     tags: data.tags
   });
 
-  // ۳. اگه هیچ یادداشتی نبود، یه یادداشت پیش‌فرض بساز
   if (data.notes.length === 0) {
     const firstNote = createNote();
     setState({
@@ -44,9 +42,9 @@ function init() {
     setState({ activeNoteId: data.notes[0].id });
   }
 
-  // ۴. راه‌اندازی‌ها
   setupTheme();
   setupEditor();
+  setupSidebar();
   loadActiveNote();
   renderPreview();
 }

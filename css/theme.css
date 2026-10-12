@@ -28,6 +28,7 @@
   --success-soft: #d1fae5;
   --warning: #f59e0b;
   --warning-soft: #fef3c7;
+  --danger: #ef4444;
 
   /* Markdown */
   --md-heading: #111827;
@@ -94,6 +95,7 @@
   --success-soft: #064e3b;
   --warning: #fbbf24;
   --warning-soft: #78350f;
+  --danger: #f87171;
 
   --md-heading: #f7f9fa;
   --md-link: #60a5fa;
