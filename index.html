@@ -33,6 +33,8 @@
       </div>
 
       <div class="header-actions">
+        <button id="import-btn" class="icon-btn" type="button" aria-label="Import" title="Import فایل">📁</button>
+        <button id="export-btn" class="icon-btn" type="button" aria-label="Export" title="Export">💾</button>
         <button id="theme-toggle" class="icon-btn" type="button" aria-label="تغییر تم" title="تغییر تم">🌙</button>
         <button id="command-btn" class="icon-btn" type="button" aria-label="Command Palette" title="Ctrl+K">⌘</button>
         <button id="toggle-sidebar" class="icon-btn" type="button" aria-label="سایدبار" title="سایدبار">☰</button>
@@ -159,6 +161,21 @@
         <ul id="command-list" class="command-list"></ul>
       </div>
     </div>
+
+    <!-- ===== Export Menu ===== -->
+    <div id="export-menu" class="export-menu" hidden>
+      <button class="export-option" data-format="html">
+        <span>📄</span>
+        <span>Export to HTML</span>
+      </button>
+      <button class="export-option" data-format="md">
+        <span>📝</span>
+        <span>Export to Markdown</span>
+      </button>
+    </div>
+
+    <!-- ===== File Input مخفی ===== -->
+    <input type="file" id="import-input" accept=".md,.markdown,.txt" hidden>
 
   </main>
 

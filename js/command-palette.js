@@ -12,40 +12,31 @@ let filteredCommands = [];
 let selectedIndex = 0;
 let isOpen = false;
 
-// ===== دستورات پیش‌فرض =====
 function getDefaultCommands() {
   return [
     {
       id: 'new-note',
       title: '➕ یادداشت جدید',
       keywords: 'new note create add',
-      action: () => {
-        createNewNote();
-      }
+      action: () => createNewNote()
     },
     {
       id: 'toggle-theme',
       title: '🌙 تغییر تم',
       keywords: 'theme dark light toggle',
-      action: () => {
-        toggleTheme();
-      }
+      action: () => toggleTheme()
     },
     {
       id: 'export-html',
       title: '📄 Export to HTML',
       keywords: 'export html download save',
-      action: () => {
-        exportToHTML();
-      }
+      action: () => exportToHTML()
     },
     {
       id: 'export-md',
       title: '📝 Export to Markdown',
       keywords: 'export markdown md download save',
-      action: () => {
-        exportToMarkdown();
-      }
+      action: () => exportToMarkdown()
     },
     {
       id: 'clear-search',
@@ -64,15 +55,12 @@ function getDefaultCommands() {
       keywords: 'delete remove trash',
       action: () => {
         const state = getState();
-        if (state.activeNoteId) {
-          deleteNote(state.activeNoteId);
-        }
+        if (state.activeNoteId) deleteNote(state.activeNoteId);
       }
     }
   ];
 }
 
-// ===== فیلتر کردن دستورات =====
 function filterCommands(query) {
   if (!query.trim()) return allCommands;
 
@@ -91,7 +79,6 @@ function filterCommands(query) {
   return results.map((r) => r.cmd);
 }
 
-// ===== رندر لیست =====
 function renderCommandList() {
   const list = document.getElementById('command-list');
   if (!list) return;
@@ -118,15 +105,12 @@ function renderCommandList() {
       updateSelection();
     });
 
-    li.addEventListener('click', () => {
-      executeCommand(idx);
-    });
+    li.addEventListener('click', () => executeCommand(idx));
 
     list.appendChild(li);
   });
 }
 
-// ===== آپدیت انتخاب =====
 function updateSelection() {
   const items = document.querySelectorAll('.command-item');
   items.forEach((item, idx) => {
@@ -135,7 +119,6 @@ function updateSelection() {
   });
 }
 
-// ===== باز کردن پالت =====
 function openPalette() {
   const palette = document.getElementById('command-palette');
   const input = document.getElementById('command-input');
@@ -152,14 +135,12 @@ function openPalette() {
   setTimeout(() => input.focus(), 20);
 }
 
-// ===== بستن پالت =====
 function closePalette() {
   const palette = document.getElementById('command-palette');
   if (palette) palette.hidden = true;
   isOpen = false;
 }
 
-// ===== اجرای دستور =====
 function executeCommand(index) {
   const cmd = filteredCommands[index];
   if (!cmd) return;
@@ -168,7 +149,6 @@ function executeCommand(index) {
   setTimeout(() => cmd.action(), 20);
 }
 
-// ===== راه‌اندازی =====
 function setupCommandPalette() {
   allCommands = getDefaultCommands();
   filteredCommands = allCommands;
@@ -177,17 +157,9 @@ function setupCommandPalette() {
   const btn = document.getElementById('command-btn');
   const overlay = document.getElementById('command-overlay');
 
-  // باز کردن با دکمه
-  if (btn) {
-    btn.addEventListener('click', openPalette);
-  }
+  if (btn) btn.addEventListener('click', openPalette);
+  if (overlay) overlay.addEventListener('click', closePalette);
 
-  // بستن با overlay
-  if (overlay) {
-    overlay.addEventListener('click', closePalette);
-  }
-
-  // فیلتر با تایپ
   if (input) {
     input.addEventListener('input', (e) => {
       filteredCommands = filterCommands(e.target.value);
@@ -195,7 +167,6 @@ function setupCommandPalette() {
       renderCommandList();
     });
 
-    // کیبورد
     input.addEventListener('keydown', (e) => {
       if (e.key === 'ArrowDown') {
         e.preventDefault();
@@ -215,16 +186,13 @@ function setupCommandPalette() {
     });
   }
 
-  // کیبورد گلوبال
   document.addEventListener('keydown', (e) => {
-    // Ctrl+K یا Cmd+K
     if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') {
       e.preventDefault();
       if (isOpen) closePalette();
       else openPalette();
     }
 
-    // Escape
     if (e.key === 'Escape' && isOpen) {
       closePalette();
     }

@@ -1,4 +1,4 @@
-/* components.css — دکمه، کارت، Command Palette، اسکرول‌بار */
+/* components.css — دکمه، کارت، Command Palette، Export Menu، اسکرول‌بار */
 
 /* ===== دکمه‌ی اصلی ===== */
 .btn-primary {
@@ -54,7 +54,6 @@
   transform: scale(0.94);
 }
 
-/* ===== Focus ===== */
 .btn-primary:focus-visible,
 .icon-btn:focus-visible {
   outline: 2px solid var(--primary);
@@ -145,6 +144,47 @@
   font-style: italic;
 }
 
+/* ===== Export Menu ===== */
+.export-menu {
+  position: fixed;
+  z-index: 500;
+  background-color: var(--bg-alt);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-lg);
+  padding: var(--space-xs);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 200px;
+  animation: slideDown 150ms ease;
+}
+
+.export-menu[hidden] {
+  display: none;
+}
+
+.export-option {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: 10px var(--space-md);
+  border-radius: var(--radius-sm);
+  background: none;
+  border: none;
+  color: var(--text);
+  font-size: var(--font-size-sm);
+  font-family: var(--font-sans);
+  cursor: pointer;
+  transition: background-color var(--transition);
+  text-align: right;
+  width: 100%;
+}
+
+.export-option:hover {
+  background-color: var(--bg-hover);
+}
+
 /* ===== Animation ===== */
 @keyframes fadeIn {
   from { opacity: 0; }
@@ -154,7 +194,7 @@
 @keyframes slideDown {
   from {
     opacity: 0;
-    transform: translateY(-20px);
+    transform: translateY(-10px);
   }
   to {
     opacity: 1;
