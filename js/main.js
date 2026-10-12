@@ -10,8 +10,8 @@ import { setupTags } from './tags.js';
 import { setupSearch } from './search.js';
 import { setupCommandPalette } from './command-palette.js';
 import { setupImportExport } from './import-export.js';
+import { setupHistory } from './history.js';
 
-// ===== ساخت یادداشت جدید =====
 function createNote() {
   return {
     id: 'n' + Date.now(),
@@ -19,12 +19,12 @@ function createNote() {
     content: '',
     tags: [],
     folder: null,
+    versions: [],
     createdAt: Date.now(),
     updatedAt: Date.now()
   };
 }
 
-// ===== راه‌اندازی =====
 function init() {
   const settings = loadSettings();
   setState(settings);
@@ -53,6 +53,7 @@ function init() {
   setupSearch();
   setupCommandPalette();
   setupImportExport();
+  setupHistory();
   loadActiveNote();
   renderPreview();
 }

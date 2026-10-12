@@ -1,4 +1,4 @@
-// editor.js — ویرایشگر متن + Auto-save
+// editor.js — ویرایشگر متن + Auto-save + Version
 
 import { getState, setState } from './state.js';
 import { saveNotes } from './storage.js';
@@ -6,11 +6,11 @@ import { renderPreview } from './preview.js';
 import { updateTags, renderTagList } from './tags.js';
 import { renderSidebar } from './sidebar.js';
 import { updateStats } from './toc.js';
+import { saveVersion } from './history.js';
 
 let debounceTimer = null;
 let isSettingValues = false;
 
-// ===== ذخیره‌ی خودکار =====
 function scheduleSave() {
   clearTimeout(debounceTimer);
 
@@ -20,7 +20,20 @@ function scheduleSave() {
 
   debounceTimer = setTimeout(() => {
     const state = getState();
-    saveNotes(state.notes, state.folders, state.tags);
+
+    // ذخیره‌ی نسخه
+    const activeNote = state.notes.find((n) => n.id === state.activeNoteId);
+    if (activeNote) {
+      const updatedNote = saveVersion(activeNote);
+      const newNotes = state.notes.map((n) =>
+        n.id === activeNote.id ? updatedNote : n
+      );
+      setState({ notes: newNotes });
+    }
+
+    // ذخیره در localStorage
+    const finalState = getState();
+    saveNotes(finalState.notes, finalState.folders, finalState.tags);
 
     setState({
       lastSavedAt: Date.now(),
@@ -34,12 +47,10 @@ function scheduleSave() {
 function updateSaveStatus(text, className) {
   const status = document.getElementById('save-status');
   if (!status) return;
-
   status.textContent = text;
   status.className = 'save-status ' + className;
 }
 
-// ===== آپدیت یادداشت فعال =====
 function updateActiveNote(patch) {
   const state = getState();
   const activeId = state.activeNoteId;
@@ -55,7 +66,6 @@ function updateActiveNote(patch) {
   setState({ notes: newNotes, isDirty: true });
 }
 
-// ===== Event Handlers =====
 function handleTitleInput(e) {
   if (isSettingValues) return;
   updateActiveNote({ title: e.target.value });
@@ -67,12 +77,10 @@ function handleContentInput(e) {
   if (isSettingValues) return;
   updateActiveNote({ content: e.target.value });
   scheduleSave();
-
   updateTags();
   renderTagList();
 }
 
-// ===== راه‌اندازی =====
 function setupEditor() {
   const titleEl = document.getElementById('note-title');
   const editorEl = document.getElementById('note-editor');
@@ -81,7 +89,6 @@ function setupEditor() {
   if (editorEl) editorEl.addEventListener('input', handleContentInput);
 }
 
-// ===== بارگذاری یادداشت فعال =====
 function loadActiveNote() {
   const state = getState();
   const note = state.notes.find((n) => n.id === state.activeNoteId);
@@ -91,28 +98,16 @@ function loadActiveNote() {
 
   if (!note) {
     isSettingValues = true;
-    if (titleEl) {
-      titleEl.value = '';
-      titleEl.disabled = true;
-    }
-    if (editorEl) {
-      editorEl.value = '';
-      editorEl.disabled = true;
-    }
+    if (titleEl) { titleEl.value = ''; titleEl.disabled = true; }
+    if (editorEl) { editorEl.value = ''; editorEl.disabled = true; }
     isSettingValues = false;
     updateStats();
     return;
   }
 
   isSettingValues = true;
-  if (titleEl) {
-    titleEl.value = note.title || '';
-    titleEl.disabled = false;
-  }
-  if (editorEl) {
-    editorEl.value = note.content || '';
-    editorEl.disabled = false;
-  }
+  if (titleEl) { titleEl.value = note.title || ''; titleEl.disabled = false; }
+  if (editorEl) { editorEl.value = note.content || ''; editorEl.disabled = false; }
   isSettingValues = false;
 
   updateStats();

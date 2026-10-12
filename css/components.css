@@ -1,4 +1,4 @@
-/* components.css — دکمه، کارت، Command Palette، Export Menu، اسکرول‌بار */
+/* components.css — دکمه، کارت، Palette، Export Menu، Versions Modal، اسکرول‌بار */
 
 /* ===== دکمه‌ی اصلی ===== */
 .btn-primary {
@@ -106,13 +106,8 @@
   font-family: var(--font-sans);
 }
 
-.command-input:focus {
-  outline: none;
-}
-
-.command-input::placeholder {
-  color: var(--text-faint);
-}
+.command-input:focus { outline: none; }
+.command-input::placeholder { color: var(--text-faint); }
 
 .command-list {
   list-style: none;
@@ -160,9 +155,7 @@
   animation: slideDown 150ms ease;
 }
 
-.export-menu[hidden] {
-  display: none;
-}
+.export-menu[hidden] { display: none; }
 
 .export-option {
   display: flex;
@@ -181,8 +174,109 @@
   width: 100%;
 }
 
-.export-option:hover {
-  background-color: var(--bg-hover);
+.export-option:hover { background-color: var(--bg-hover); }
+
+/* ===== Versions Modal ===== */
+.versions-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-md);
+}
+
+.versions-overlay {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+}
+
+.versions-content {
+  position: relative;
+  width: 100%;
+  max-width: 600px;
+  max-height: 80vh;
+  background-color: var(--bg-alt);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  animation: slideDown 200ms ease;
+}
+
+.versions-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-md) var(--space-lg);
+  border-bottom: 1px solid var(--border);
+}
+
+.versions-header h3 {
+  font-size: var(--font-size-lg);
+  font-weight: 700;
+  color: var(--text);
+}
+
+.versions-list {
+  list-style: none;
+  padding: var(--space-sm);
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.version-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  padding: var(--space-md);
+  background-color: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  transition: all var(--transition);
+}
+
+.version-item:hover {
+  border-color: var(--primary);
+}
+
+.version-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.version-title {
+  font-weight: 600;
+  font-size: var(--font-size-sm);
+  color: var(--text);
+  margin-bottom: 4px;
+}
+
+.version-preview {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-bottom: 4px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.version-date {
+  font-size: 11px;
+  color: var(--text-faint);
+}
+
+.version-restore {
+  flex-shrink: 0;
+  font-size: 12px;
+  padding: 6px 12px;
 }
 
 /* ===== Animation ===== */
@@ -192,33 +286,19 @@
 }
 
 @keyframes slideDown {
-  from {
-    opacity: 0;
-    transform: translateY(-10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 /* ===== Scrollbar ===== */
-::-webkit-scrollbar {
-  width: 10px;
-  height: 10px;
-}
-
-::-webkit-scrollbar-track {
-  background: transparent;
-}
-
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb {
   background-color: var(--border-strong);
   border-radius: 5px;
   border: 3px solid transparent;
   background-clip: content-box;
 }
-
 ::-webkit-scrollbar-thumb:hover {
   background-color: var(--text-faint);
   background-clip: content-box;
@@ -226,9 +306,7 @@
 
 /* ===== Reduced Motion ===== */
 @media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
+  *, *::before, *::after {
     animation-duration: 0.01ms !important;
     transition-duration: 0.01ms !important;
   }
