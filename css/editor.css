@@ -73,3 +73,9 @@
 .editor-stat {
   font-family: var(--font-mono);
 }
+
+.note-editor:disabled,
+.note-title-input:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
