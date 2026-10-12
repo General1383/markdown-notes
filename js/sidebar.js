@@ -4,6 +4,7 @@ import { getState, setState } from './state.js';
 import { loadActiveNote } from './editor.js';
 import { renderPreview } from './preview.js';
 import { updateTags, renderTagList, extractTags } from './tags.js';
+import { searchNotes } from './search.js';
 
 // ===== ساخت یادداشت جدید =====
 function createNewNote() {
@@ -73,19 +74,17 @@ function selectNote(noteId) {
 // ===== فیلتر یادداشت‌ها =====
 function getFilteredNotes() {
   const state = getState();
-  const query = (state.searchQuery || '').toLowerCase().trim();
+  const query = (state.searchQuery || '').trim();
   const activeTags = state.activeTagFilter || [];
 
   let notes = state.notes;
 
+  // Fuzzy search
   if (query) {
-    notes = notes.filter((n) => {
-      const inTitle = (n.title || '').toLowerCase().includes(query);
-      const inContent = (n.content || '').toLowerCase().includes(query);
-      return inTitle || inContent;
-    });
+    notes = searchNotes(notes, query);
   }
 
+  // فیلتر تگ
   if (activeTags.length > 0) {
     notes = notes.filter((n) => {
       const noteTags = extractTags(n.content);

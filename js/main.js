@@ -7,6 +7,7 @@ import { renderPreview } from './preview.js';
 import { setupTheme } from './theme.js';
 import { setupSidebar } from './sidebar.js';
 import { setupTags } from './tags.js';
+import { setupSearch } from './search.js';
 
 // ===== ساخت یادداشت جدید =====
 function createNote() {
@@ -47,6 +48,7 @@ function init() {
   setupEditor();
   setupSidebar();
   setupTags();
+  setupSearch();
   loadActiveNote();
   renderPreview();
 }

@@ -175,3 +175,24 @@
   font-style: italic;
   width: 100%;
 }
+
+.search-input {
+  width: 100%;
+  padding: 8px 36px 8px 12px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background-color: var(--bg-alt);
+  color: var(--text);
+  font-size: var(--font-size-sm);
+  transition: all var(--transition);
+}
+
+.search-input::placeholder {
+  color: var(--text-faint);
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px var(--primary-soft);
+}
