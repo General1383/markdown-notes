@@ -5,6 +5,7 @@ import { saveNotes } from './storage.js';
 import { renderPreview } from './preview.js';
 import { updateTags, renderTagList } from './tags.js';
 import { renderSidebar } from './sidebar.js';
+import { updateStats } from './toc.js';
 
 let debounceTimer = null;
 let isSettingValues = false;
@@ -15,6 +16,7 @@ function scheduleSave() {
 
   updateSaveStatus('در حال ذخیره...', 'saving');
   renderPreview();
+  updateStats();
 
   debounceTimer = setTimeout(() => {
     const state = getState();
@@ -66,7 +68,6 @@ function handleContentInput(e) {
   updateActiveNote({ content: e.target.value });
   scheduleSave();
 
-  // آپدیت تگ‌ها
   updateTags();
   renderTagList();
 }
@@ -99,6 +100,7 @@ function loadActiveNote() {
       editorEl.disabled = true;
     }
     isSettingValues = false;
+    updateStats();
     return;
   }
 
@@ -112,6 +114,8 @@ function loadActiveNote() {
     editorEl.disabled = false;
   }
   isSettingValues = false;
+
+  updateStats();
 }
 
 export {
