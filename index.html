@@ -145,6 +145,21 @@
 
     </div>
 
+    <!-- ===== Command Palette ===== -->
+    <div id="command-palette" class="command-palette" hidden>
+      <div class="command-overlay" id="command-overlay"></div>
+      <div class="command-modal" role="dialog" aria-label="پالت دستورات">
+        <input 
+          type="text" 
+          id="command-input" 
+          class="command-input" 
+          placeholder="دنبال چی می‌گردی؟"
+          aria-label="جستجوی دستور"
+        >
+        <ul id="command-list" class="command-list"></ul>
+      </div>
+    </div>
+
   </main>
 
   <script type="module" src="js/main.js"></script>

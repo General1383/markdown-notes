@@ -8,6 +8,7 @@ import { setupTheme } from './theme.js';
 import { setupSidebar } from './sidebar.js';
 import { setupTags } from './tags.js';
 import { setupSearch } from './search.js';
+import { setupCommandPalette } from './command-palette.js';
 
 // ===== ساخت یادداشت جدید =====
 function createNote() {
@@ -49,6 +50,7 @@ function init() {
   setupSidebar();
   setupTags();
   setupSearch();
+  setupCommandPalette();
   loadActiveNote();
   renderPreview();
 }

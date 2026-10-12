@@ -1,4 +1,4 @@
-/* components.css — دکمه، کارت، اسکرول‌بار */
+/* components.css — دکمه، کارت، Command Palette، اسکرول‌بار */
 
 /* ===== دکمه‌ی اصلی ===== */
 .btn-primary {
@@ -59,6 +59,107 @@
 .icon-btn:focus-visible {
   outline: 2px solid var(--primary);
   outline-offset: 2px;
+}
+
+/* ===== Command Palette ===== */
+.command-palette {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 15vh;
+}
+
+.command-palette[hidden] {
+  display: none;
+}
+
+.command-overlay {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(4px);
+  animation: fadeIn 150ms ease;
+}
+
+.command-modal {
+  position: relative;
+  width: 90%;
+  max-width: 560px;
+  background-color: var(--bg-alt);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  overflow: hidden;
+  animation: slideDown 200ms ease;
+}
+
+.command-input {
+  width: 100%;
+  padding: var(--space-md) var(--space-lg);
+  border: none;
+  border-bottom: 1px solid var(--border);
+  background-color: transparent;
+  color: var(--text);
+  font-size: var(--font-size-lg);
+  font-family: var(--font-sans);
+}
+
+.command-input:focus {
+  outline: none;
+}
+
+.command-input::placeholder {
+  color: var(--text-faint);
+}
+
+.command-list {
+  list-style: none;
+  max-height: 400px;
+  overflow-y: auto;
+  padding: var(--space-sm);
+}
+
+.command-item {
+  padding: 10px var(--space-md);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  font-size: var(--font-size-sm);
+  color: var(--text);
+  transition: background-color var(--transition);
+}
+
+.command-item:hover,
+.command-item.selected {
+  background-color: var(--primary-soft);
+  color: var(--primary);
+}
+
+.command-empty {
+  padding: var(--space-lg);
+  text-align: center;
+  color: var(--text-faint);
+  font-size: var(--font-size-sm);
+  font-style: italic;
+}
+
+/* ===== Animation ===== */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* ===== Scrollbar ===== */
