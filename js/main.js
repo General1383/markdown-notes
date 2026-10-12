@@ -11,7 +11,6 @@ import { setupSearch } from './search.js';
 import { setupCommandPalette } from './command-palette.js';
 import { setupImportExport } from './import-export.js';
 import { setupHistory } from './history.js';
-import { setupA11y } from './a11y.js';
 
 function createNote() {
   return {
@@ -55,7 +54,6 @@ function init() {
   setupCommandPalette();
   setupImportExport();
   setupHistory();
-  setupA11y();
   loadActiveNote();
   renderPreview();
 }
